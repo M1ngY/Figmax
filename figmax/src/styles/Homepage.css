@@ -81,7 +81,9 @@
     color:#7e7a7a;
     font-weight: bold;
     margin-top: 1%;
-    margin-left: 4.5%;  
+    margin-left: 4.5%;
+    display: flex;
+    align-items: center;
 }
 
 .pic {
@@ -89,3 +91,12 @@
     margin-top: -20%;
     zoom:1.5;
 }
+
+.editableDiv {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 30px;
+    flex-grow: 1;
+    max-width: 700px;
+    margin-right: 10px;
+  }
