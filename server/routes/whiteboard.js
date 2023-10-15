@@ -26,5 +26,18 @@ router.get("/:boardName", async (req, res) => {
   }
 });
 
+router.delete("/:whiteboard", async (req, res) => {
+  try {
+      const whiteboard = req.params.whiteboard;
+      const result = await db.deleteByName(whiteboard);
+      if (result.deleteCount === 0) {
+          return res.status(404).json({ message: "Whiteboard item not found." });
+      }
+      res.json({ message: "Whiteboard item deleted successfully." });
+  } catch (err) {
+      res.status(500).json({ message: "An error occurred.", error: err.message });
+  }
+});
+
 
 export default router;

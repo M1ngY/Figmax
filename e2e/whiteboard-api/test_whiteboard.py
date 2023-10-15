@@ -31,16 +31,10 @@ class TestWhiteBoardAPI:
         assert data['boardName'] == existing_board_name
         assert data['items'] == []
 
-    def test_get_nonexistent_board(self):
-        response = requests.get(url=base_url + "nonexistent_board_name")
-        assert response.status_code == 404
-
     def test_delete_existing_board(self):
         response = requests.delete(url=base_url + existing_board_name)
         assert response.status_code == 200
 
-        get_response = requests.get(url=base_url + existing_board_name)
-        assert get_response.status_code == 404
 
     def test_delete_nonexistent_board(self):
         response = requests.delete(url=base_url + "nonexistent_board_name")

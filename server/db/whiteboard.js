@@ -12,6 +12,13 @@ class Whiteboard {
     let result = await connection.db("figmaX").collection('whiteboards').insertOne(whiteboard);
     return result;
   }
+
+  deleteByName = async(query) => {
+    const connection = await DBManager.getConn();
+    let result = await connection.db("figmaX").collection('whiteboards').deleteOne(query);
+    return result;
+  }
+
 }
 
 export default Whiteboard;
