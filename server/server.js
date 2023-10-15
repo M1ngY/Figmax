@@ -28,3 +28,29 @@ app.use("/whiteboard", whiteboardRoutes);
 server.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
+
+app.get("/whiteboard/:id", async (req, res) => {
+  try {
+      const whiteboardId = req.params.id;
+      const whiteboardItem = await db.getById(whiteboardId);
+      if (!whiteboardItem) {
+          return res.status(404).json({ message: "Whiteboard item not found." });
+      }
+      res.json(whiteboardItem);
+  } catch (err) {
+      res.status(500).json({ message: "An error occurred.", error: err.message });
+  }
+});
+
+app.delete("/whiteboard/:id", async (req, res) => {
+  try {
+      const whiteboardId = req.params.id;
+      const result = await db.deleteById(whiteboardId);
+      if (!result) {
+          return res.status(404).json({ message: "Whiteboard item not found." });
+      }
+      res.json({ message: "Whiteboard item deleted successfully." });
+  } catch (err) {
+      res.status(500).json({ message: "An error occurred.", error: err.message });
+  }
+});
