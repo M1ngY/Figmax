@@ -13,15 +13,9 @@ class Whiteboard {
     return result;
   }
 
-  getById = async(id) => {
+  deleteByName = async(query) => {
     const connection = await DBManager.getConn();
-    let whiteboard = await connection.db("figmaX").collection('whiteboards').findOne({ _id: new DBManager.ObjectId(id) });
-    return whiteboard;
-  }
-
-  deleteById = async(id) => {
-    const connection = await DBManager.getConn();
-    let result = await connection.db("figmaX").collection('whiteboards').deleteOne({ _id: new DBManager.ObjectId(id) });
+    let result = await connection.db("figmaX").collection('whiteboards').deleteOne(query);
     return result;
   }
 
