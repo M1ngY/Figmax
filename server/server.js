@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import Server from 'socket.io';
 import http from 'http';
 
 import "./env/env.js";
 import Whiteboard from "./db/whiteboard.js"
 import whiteboardRoutes from "./routes/whiteboard.js";
+import socketServer from "./socket.js";
 
 const PORT = process.env.PORT || 8000
 const app = express()
@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use("/whiteboard", whiteboardRoutes);
+socketServer(server, db)
 
 server.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
