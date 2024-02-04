@@ -17,9 +17,10 @@ services:
             context: ./
             dockerfile: ./server/Dockerfile
         ports:
-            - 5000:5000
+            - 3001:3001
         env_file:
             - ./server/env/dev.env
+        command: node server.js
         depends_on:
             - mongodb
             - redis-cache
