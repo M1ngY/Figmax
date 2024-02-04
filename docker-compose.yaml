@@ -12,6 +12,27 @@ services:
             MONGO_INITDB_DATABASE: figmaX
         ports:
             - 27017:27017
+    server:
+        build:
+            context: ./
+            dockerfile: ./server/Dockerfile
+        ports:
+            - 3001:3001
+        env_file:
+            - ./server/env/dev.env
+        command: node server.js
+        depends_on:
+            - mongodb
+            - redis-cache
+    redis-cache:
+        image: redis:6.2-alpine
+        ports:
+            - 6379:6379
+        volumes:
+            - cache:/data
+            - ./redis/redis.conf:/etc/redis/redis.conf
+        command: redis-server /etc/redis/redis.conf
 
 volumes:
-  mongo:
+    mongo:
+    cache:

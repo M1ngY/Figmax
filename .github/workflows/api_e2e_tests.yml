@@ -1,0 +1,28 @@
+name: API E2E Tests
+run-name: API E2E Tests
+on:
+  push
+jobs:
+  API-E2E-Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: start local env
+        run: docker-compose up -d
+      - name: create python3 venv
+        working-directory: ./e2e
+        run: python3 -m venv env
+      - name: activate
+        working-directory: ./e2e
+        run: source ./env/bin/activate
+      - name: install dependency 
+        working-directory: ./e2e
+        run: pip install -r ./requirements.txt
+      - name: run test
+        working-directory: ./e2e
+        run: pytest

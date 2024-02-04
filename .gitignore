@@ -128,3 +128,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+e2e/env
+e2e/*/__pycache__
+e2e/.pytest_cache
